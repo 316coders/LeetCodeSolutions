@@ -24,7 +24,7 @@ class Solution:
     def kidsWithCandies(self, candies: List[int], extraCandies: int) -> List[bool]:
         maxc = max(candies)
         most_candies = [i + extraCandies for i in candies]
-        print(most_candies)
+        #print(most_candies)
         can_be_most = []
         for i in most_candies:
             if i >= maxc:
