@@ -1,2 +1,4 @@
-# nowcoderSolutions
-Solutions for nowcoder contests
+# LeetCodeSolutions
+Solutions for nowcoder，
+leetcode
+leetcode-weekly-contest
