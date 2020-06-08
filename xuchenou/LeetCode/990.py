@@ -37,3 +37,49 @@ equations[i][0] 和 equations[i][3] 是小写字母
 equations[i][1] 要么是 '='，要么是 '!'
 equations[i][2] 是 '='
 """
+# ==  or  !=
+#equations 最多500项,最少1项. 且每一位都是4位,两个字母,中间是== 或者 !=
+#分析思路
+#先检查所有的 == 项, 所有 == 的都放在一组,比如 a == b, c == d,c == e则 [a,b]  [c,d,e]
+#然后对每一个==中的元素查询,如果 [c,d,e] 中 c != e ,false
+
+#https://zh.wikipedia.org/wiki/%E5%B9%B6%E6%9F%A5%E9%9B%86
+from typing import List
+from typing import Set
+from collections import defaultdict
+
+
+class Solution:
+
+    class UnionFind:
+        def __init__(self):
+            self.parent = list(range(26))
+        
+        def find(self, index):
+            if index == self.parent[index]:
+                return index
+            self.parent[index] = self.find(self.parent[index])
+            return self.parent[index]
+        
+        def union(self, index1, index2):
+            self.parent[self.find(index1)] = self.find(index2)
+
+
+    def equationsPossible(self, equations: List[str]) -> bool:
+        uf = Solution.UnionFind()
+        for st in equations:
+            if st[1] == "=":
+                index1 = ord(st[0]) - ord("a")
+                index2 = ord(st[3]) - ord("a")
+                uf.union(index1, index2)
+        for st in equations:
+            if st[1] == "!":
+                index1 = ord(st[0]) - ord("a")
+                index2 = ord(st[3]) - ord("a")
+                if uf.find(index1) == uf.find(index2):
+                    return False
+        return True
+
+l1 = ["a==b","b!=c","c==a"]
+s1 = Solution()
+s1.equationsPossible(l1)
