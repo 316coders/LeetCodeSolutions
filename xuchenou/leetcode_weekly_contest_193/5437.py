@@ -17,15 +17,40 @@
 1 <= arr[i] <= 10^9
 0 <= k <= arr.length
 """
-from typing import list
-from typing import dict
+from typing import List
+from typing import Dict
 
 class Solution:
     def findLeastNumOfUniqueInts(self, arr: List[int], k: int) -> int:
         length = len(arr)
         #思路
         #hash表统计每一个数字出现的次数,比如 5:2 4:1
+        d1 = dict()   #{4: 1, 3: 3, 1: 2, 2: 1}
+        for i in arr:
+            if i in d1:
+                d1[i] += 1
+            else:
+                d1[i] = 1
         #对dict sort? 按value排序
+        d2 = sorted(d1.items(),key = lambda item:item[1])  #[(4, 1), (2, 1), (1, 2), (3, 3)]
         #根据k个删掉对应个 字典对,注意最后一对
+        num_type = len(d2)  #4
+        for key,value in d2:
+            k = k-value
+            if k < 0:
+                break
+            else:
+                num_type -= 1
         #最后剩下几个字典,就是返回几种
-        d1 = dict()
+        return(num_type)
+
+
+
+arr = [4,3,1,1,3,3,2]
+k = 3
+s = Solution()
+print(s.findLeastNumOfUniqueInts(arr,k))
+#{4: 1, 3: 3, 1: 2, 2: 1}
+arr2 = [5,5,4]
+k2 = 1
+print(s.findLeastNumOfUniqueInts(arr2,k2))
