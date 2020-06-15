@@ -17,12 +17,19 @@
 
 所有输入只包含小写字母 a-z 。
 """
-
+from typing import List
 class Solution:
     def longestCommonPrefix(self, strs: List[str]) -> str:
-
-
-
+        #空直接返回无
+        if not strs:
+            return ""        
+        length, count = len(strs[0]), len(strs)
+        for i in range(length):
+            c = strs[0][i]
+            #第一个条件是如果有字符串到尾了, 第二个条件是有字符串在i的位置上字母不一样了
+            if any(i == len(strs[j]) or strs[j][i] != c for j in range(1, count)):
+                return strs[0][:i]
+        return strs[0]
 s = ["flower","flow","flight"]
 c = Solution()
-print(c.l
+print(c.longestCommonPrefix(s))
