@@ -39,7 +39,6 @@
 names[i] 由小写英文字母、数字和/或圆括号组成。
 """
 from typing import List
-import re
 class Solution:
     def add_name(self,L1: List[str],name: str,k: int):
         if name not in L1:
@@ -51,9 +50,10 @@ class Solution:
         else:
             #new_name = name[:-2] + str(k) + ")"
             print(name)
-            L2 = re.split(r'[()]',name)
+            L2 = name.rsplit('(',1)
             print(L2)
             new_name = L2[0] + "(" + str(k) + ")"
+            print(new_name)
             self.add_name(L1,new_name,k+1)
                     
 
@@ -64,21 +64,24 @@ class Solution:
             self.add_name(result,i,1)
         return result
 
-names = ["pes","fifa","gta","pes(2019)"]
 S = Solution()
-print(S.getFolderNames(names))
+#names = ["pes","fifa","gta","pes(2019)"]
+# print(S.getFolderNames(names))
 
-names2 = ["gta","gta(1)","gta","avalon"]
-print(S.getFolderNames(names2))
+# names2 = ["gta","gta(1)","gta","avalon"]
+# print(S.getFolderNames(names2))
 
-names3 = ["onepiece","onepiece(1)","onepiece(2)","onepiece(3)","onepiece"]
-print(S.getFolderNames(names3))
+# names3 = ["onepiece","onepiece(1)","onepiece(2)","onepiece(3)","onepiece"]
+# print(S.getFolderNames(names3))
 
-names4 = ["wano","wano","wano","wano"]
-print(S.getFolderNames(names4))
+# names4 = ["wano","wano","wano","wano"]
+# print(S.getFolderNames(names4))
 
-names5 = ["kaido","kaido(1)","kaido","kaido(1)"]
-print(S.getFolderNames(names5))
+# names5 = ["kaido","kaido(1)","kaido","kaido(1)"]
+# print(S.getFolderNames(names5))
 
-names6 = ["l",'l','l(200)','l(200)','l(300)']
-print(S.getFolderNames(names6))
+# names6 = ["l",'l','l(200)','l(200)','l(300)']
+# print(S.getFolderNames(names6))
+
+names7 = ['b','b','b(2)','b(1)','b','b(1)']
+print(S.getFolderNames(names7))
